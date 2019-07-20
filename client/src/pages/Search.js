@@ -8,22 +8,26 @@ class Search extends Component {
   state = {
     search: "",
     results: [],
-    title: "",
-    authors: "",
-    description: "",
-    image: "",
-    link: ""
+    // title: "",
+    // authors: "",
+    // description: "",
+    // image: "",
+    // link: ""
   };
 
   // When this component mounts, search the Giphy API for pictures of kittens
   componentDidMount() {
+    console.log("mounted!")
     // this.searchGiphy("kittens");
   }
 
   searchGoogle = query => {
     API.search(query)
       // .then(res => console.log(res.data.items[0].volumeInfo))
-      .then(res => this.setState({ results: res.data.items }))
+      .then(res => {
+        console.log(res.data.items)
+        this.setState({ results: res.data.items })
+      })
       // .catch(err => console.log(err))
     //  .then(console.log(this.state.results));
   };
@@ -42,11 +46,23 @@ class Search extends Component {
     this.searchGoogle(this.state.search);
   };
 
-  handleSaveClicked = (event) => {
-    event.preventDefault();
-    const data = event.target.data
-    console.log(data);
+  handleSaveClicked = (id) => {
+
+    const selectedBook = this.state.results.filter(result => result.id === id)
+    console.log(selectedBook[0])
+
+    API.saveBook({
+      title: selectedBook[0].volumeInfo.title,
+      authors: selectedBook[0].volumeInfo.authors.join(', '),
+      description: selectedBook[0].volumeInfo.description,
+      image: selectedBook[0].volumeInfo.imageLinks.smallThumbnail,
+      link: selectedBook[0].volumeInfo.previewLink
+    })
+    .then(res => console.log(res))
+    .catch(err => console.log(err));
   }
+
+
 
   render() {
     return (
@@ -65,14 +81,21 @@ class Search extends Component {
         />
         {this.state.results.length ? (
           <div>
-          {this.state.results.map(result => {
-            
+          {this.state.results
+          .filter(result => 
+            result.volumeInfo 
+            && result.volumeInfo.imageLinks
+            && result.volumeInfo.authors)
+          .map(result => {
+            if(!result.volumeInfo.imageLinks) {
+              console.log(JSON.stringify(result.volumeInfo, null, 4));
+            }
             return(
               <li className="list-group-item" key={result.id}>
             <div className="row">
               <div className="col-9">
                 <h2>{result.volumeInfo.title}</h2>
-                <p>Written by {result.volumeInfo.authors} </p>
+                <p>Written by {result.volumeInfo.authors.join(', ')} </p>
               </div>
               <div className="col-3 text-right">
                 <a
@@ -86,8 +109,8 @@ class Search extends Component {
                 <button
                   className="btn btn-secondary ml-2"
                   data={result.id}
-                  onClick={
-                    this.handleSaveClicked}
+                  onClick={ () =>
+                    this.handleSaveClicked(result.id)}
                 >
                   Save
                 </button>
