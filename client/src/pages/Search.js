@@ -40,9 +40,8 @@ class Search extends Component {
   render(props) {
     return (
       <div className="container">
-        <h1>Search Page</h1>
 
-        <div className="jumbotron jumbotron-fluid">
+        <div className="jumbotron jumbotron-fluid mt-4 rounded">
           <div className="container">
             <h1 className="display-4">(React) Google Books Search</h1>
             <p className="lead">Search for and Save Books of Interest</p>
