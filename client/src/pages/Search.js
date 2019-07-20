@@ -37,6 +37,11 @@ class Search extends Component {
     this.searchGoogle(this.state.search);
   };
 
+  handleSaveClicked = event => {
+    event.preventDefault();
+    console.log("Save clicked!!")
+  }
+
   render(props) {
     return (
       <div className="container">

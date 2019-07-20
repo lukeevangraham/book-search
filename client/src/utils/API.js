@@ -6,5 +6,9 @@ export default {
     // console.log("query is: ", query)
     // console.log(axios.get(BASEURL + query))
     return axios.get(BASEURL + query);
+  },
+
+  saveBook: function(bookData) {
+    return axios.post("/api/books", bookData);
   }
 };

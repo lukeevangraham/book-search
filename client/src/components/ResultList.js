@@ -14,8 +14,20 @@ function ResultList(props) {
                 <p>Written by {result.volumeInfo.authors} </p>
               </div>
               <div className="col-3 text-right">
-              <a class="btn btn-secondary ml-2" target="blank" href={result.volumeInfo.previewLink} role="button">View</a>
-              <a class="btn btn-secondary ml-2" target="blank" href={result.volumeInfo.previewLink} role="button">Save</a>
+                <a
+                  class="btn btn-secondary ml-2"
+                  target="blank"
+                  href={result.volumeInfo.previewLink}
+                  role="button"
+                >
+                  View
+                </a>
+                <button
+                  class="btn btn-secondary ml-2"
+                  onClick={this.handleSaveClicked}
+                >
+                  Save
+                </button>
               </div>
             </div>
             <div className="row">
