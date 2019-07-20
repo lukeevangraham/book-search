@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import SearchForm from "../components/SearchForm";
-import ResultList from "../components/ResultList";
+// import ResultList from "../components/ResultList";
 import API from "../utils/API";
 // import { PromiseProvider } from "mongoose";
 
 class Search extends Component {
   state = {
     search: "",
-    results: []
+    results: [],
+    title: "",
+    authors: "",
+    description: "",
+    image: "",
+    link: ""
   };
 
   // When this component mounts, search the Giphy API for pictures of kittens
@@ -20,7 +25,7 @@ class Search extends Component {
       // .then(res => console.log(res.data.items[0].volumeInfo))
       .then(res => this.setState({ results: res.data.items }))
       // .catch(err => console.log(err))
-     .then(console.log(this.state.results));
+    //  .then(console.log(this.state.results));
   };
 
   handleInputChange = event => {
@@ -37,12 +42,13 @@ class Search extends Component {
     this.searchGoogle(this.state.search);
   };
 
-  handleSaveClicked = event => {
+  handleSaveClicked = (event) => {
     event.preventDefault();
-    console.log("Save clicked!!")
+    const data = event.target.data
+    console.log(data);
   }
 
-  render(props) {
+  render() {
     return (
       <div className="container">
 
@@ -57,7 +63,56 @@ class Search extends Component {
           handleFormSubmit={this.handleFormSubmit}
           handleInputChange={this.handleInputChange}
         />
-        <ResultList results={this.state.results} />
+        {this.state.results.length ? (
+          <div>
+          {this.state.results.map(result => {
+            
+            return(
+              <li className="list-group-item" key={result.id}>
+            <div className="row">
+              <div className="col-9">
+                <h2>{result.volumeInfo.title}</h2>
+                <p>Written by {result.volumeInfo.authors} </p>
+              </div>
+              <div className="col-3 text-right">
+                <a
+                  className="btn btn-secondary ml-2"
+                  target="blank"
+                  href={result.volumeInfo.previewLink}
+                  role="button"
+                >
+                  View
+                </a>
+                <button
+                  className="btn btn-secondary ml-2"
+                  data={result.id}
+                  onClick={
+                    this.handleSaveClicked}
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-2">
+                <img
+                  alt={result.title}
+                  className="img-fluid"
+                  src={result.volumeInfo.imageLinks.smallThumbnail}
+                />
+              </div>
+              <div className="col-10">
+                <p>{result.volumeInfo.description}</p>
+              </div>
+            </div>
+          </li>
+            )
+          })}
+          </div>
+        ) : (
+          <h3>No Results to Display</h3>
+        )}
+        {/* <ResultList results={this.state.results} /> */}
       </div>
     );
   }
