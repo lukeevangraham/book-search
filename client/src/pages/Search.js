@@ -82,10 +82,7 @@ class Search extends Component {
         {this.state.results.length ? (
           <div>
           {this.state.results
-          .filter(result => 
-            result.volumeInfo 
-            && result.volumeInfo.imageLinks
-            && result.volumeInfo.authors)
+
           .map(result => {
             if(!result.volumeInfo.imageLinks) {
               console.log(JSON.stringify(result.volumeInfo, null, 4));
@@ -95,7 +92,7 @@ class Search extends Component {
             <div className="row">
               <div className="col-9">
                 <h2>{result.volumeInfo.title}</h2>
-                <p>Written by {result.volumeInfo.authors.join(', ')} </p>
+                <p>Written by {result.volumeInfo.authors ? result.volumeInfo.authors.join(', ') : "Unknown" } </p>
               </div>
               <div className="col-3 text-right">
                 <a
@@ -121,7 +118,7 @@ class Search extends Component {
                 <img
                   alt={result.title}
                   className="img-fluid"
-                  src={result.volumeInfo.imageLinks.smallThumbnail}
+                  src={result.volumeInfo.imageLinks ? result.volumeInfo.imageLinks.smallThumbnail : ""}
                 />
               </div>
               <div className="col-10">
