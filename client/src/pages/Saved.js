@@ -42,7 +42,7 @@ this.loadBooks();
         </div>
 
         {this.state.results.length ? (
-          <div>
+          <div className="mb-5">
             {this.state.results.map(result => {
               return (
                 <li className="list-group-item" key={result._id}>
