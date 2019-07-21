@@ -59,7 +59,8 @@ class Search extends Component {
       link: selectedBook[0].volumeInfo.previewLink
     })
     .then(res => console.log(res))
-    .catch(err => console.log(err));
+    .catch(err => console.log(err))
+    .then(alert("Book Saved!"))
   }
 
 
@@ -80,7 +81,7 @@ class Search extends Component {
           handleInputChange={this.handleInputChange}
         />
         {this.state.results.length ? (
-          <div>
+          <div className="mt-4">
           {this.state.results
 
           .map(result => {
@@ -88,7 +89,7 @@ class Search extends Component {
               console.log(JSON.stringify(result.volumeInfo, null, 4));
             }
             return(
-              <li className="list-group-item" key={result.id}>
+              <li className="list-group-item pb-2" key={result.id}>
             <div className="row">
               <div className="col-9">
                 <h2>{result.volumeInfo.title}</h2>
@@ -130,7 +131,9 @@ class Search extends Component {
           })}
           </div>
         ) : (
-          <h3>No Results to Display</h3>
+          <div className="container bg-light mt-4 rounded pt-3 pb-5 mb-5">
+          <p>No Results to Display</p>
+          </div>
         )}
         {/* <ResultList results={this.state.results} /> */}
       </div>

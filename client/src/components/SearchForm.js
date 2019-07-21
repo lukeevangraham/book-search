@@ -2,7 +2,7 @@ import React from "react";
 
 function SearchForm(props) {
   return (
-    <form>
+    <form className="bg-light p-3 rounded">
       <div className="form-group">
         <label htmlFor="search">Book Search:</label>
         <input
