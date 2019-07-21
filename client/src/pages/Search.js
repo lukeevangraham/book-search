@@ -3,6 +3,7 @@ import SearchForm from "../components/SearchForm";
 // import ResultList from "../components/ResultList";
 import API from "../utils/API";
 // import { PromiseProvider } from "mongoose";
+// import "./search.css";
 
 class Search extends Component {
   state = {
@@ -131,8 +132,8 @@ class Search extends Component {
           })}
           </div>
         ) : (
-          <div className="container bg-light mt-4 rounded pt-3 pb-5 mb-5">
-          <p>No Results to Display</p>
+          <div className="container  bg-light mt-4 rounded pt-3 pb-5 mb-5 empty">
+          <p className="mb-5 pb-5">No Results to Display</p>
           </div>
         )}
         {/* <ResultList results={this.state.results} /> */}
