@@ -86,7 +86,9 @@ this.loadBooks();
             })}
           </div>
         ) : (
-          <h3>No Results to Display</h3>
+          <div className="container bg-light mt-4 rounded pt-3 pb-5 mb-5">
+          <p>No Results to Display</p>
+          </div>
         )}
         {/* <ResultList results={this.state.results} /> */}
       </div>
