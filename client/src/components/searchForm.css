@@ -3,10 +3,6 @@
     padding: 100
 } */
 
-.jumbotron {
- background: rgba(238, 238, 238, .85)
-}
-
-.tint-bg {
+.form-bg {
  background: rgba(238, 238, 238, .85)
 }
