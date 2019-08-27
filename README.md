@@ -3,9 +3,10 @@
 ## Overview
 Deployed at: https://lgraham-book-search.herokuapp.com/
 
+There are so many books out there.  How do you keep track of what you want to read?  In this activity, I created a new React-based Google Books Search app to help organize a reading list. This app utilizes React components, helper/util functions, and React's lifecycle methods to query and display books based on user searches. I also used Node, Express and MongoDB so that users can save books to review or purchase later.
+
 ![Home](./readmeImages/home.png?raw=true "Home")
 
-In this activity, I created a new React-based Google Books Search app. This assignment requires me to create React components, work with helper/util functions, and utilize React lifecycle methods to query and display books based on user searches. I also used Node, Express and MongoDB so that users can save books to review or purchase later.
 
 ## Using the app
 
