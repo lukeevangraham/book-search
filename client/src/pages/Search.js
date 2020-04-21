@@ -3,9 +3,18 @@ import SearchForm from "../components/SearchForm";
 // import ResultList from "../components/ResultList";
 import API from "../utils/API";
 // import { PromiseProvider } from "mongoose";
+import openSocket from 'socket.io-client';
 import "./search.css";
+const socket = openSocket('http://localhost:8000');
 
 class Search extends Component {
+
+  constructor(props) {
+    super(props);
+    
+    this.sendSocketIO = this.sendSocketIO.bind(this);
+  }
+
   state = {
     search: "",
     results: []
@@ -63,6 +72,10 @@ class Search extends Component {
       .then(alert("Book Saved!"));
   };
 
+  sendSocketIO() {
+    socket.emit('example_message', 'demo');
+  }
+
   render() {
     return (
       <div className="container">
@@ -72,6 +85,7 @@ class Search extends Component {
             <p className="lead">Search for and Save Books of Interest</p>
           </div>
         </div>
+        <div><button onClick={this.sendSocketIO}>Send Socket.io</button></div>
         <SearchForm
           search={this.state.search}
           handleFormSubmit={this.handleFormSubmit}
