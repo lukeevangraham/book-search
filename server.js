@@ -26,6 +26,7 @@ io.on('connection', function(socket){
   });
   socket.on('example_message', function(msg){
     console.log('message: ' + msg);
+    io.emit('example_message', msg)
   });
 });
 io.listen(8000);

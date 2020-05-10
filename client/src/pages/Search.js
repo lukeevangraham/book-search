@@ -11,13 +11,14 @@ class Search extends Component {
 
   constructor(props) {
     super(props);
-    
+
     this.sendSocketIO = this.sendSocketIO.bind(this);
   }
 
   state = {
     search: "",
-    results: []
+    results: [],
+    message: ""
     // title: "",
     // authors: "",
     // description: "",
@@ -58,7 +59,10 @@ class Search extends Component {
 
   handleSaveClicked = id => {
     const selectedBook = this.state.results.filter(result => result.id === id);
-    console.log(selectedBook[0]);
+    // console.log(selectedBook[0]);
+
+    this.sendSocketIO(selectedBook[0].volumeInfo.title)
+
 
     API.saveBook({
       title: selectedBook[0].volumeInfo.title,
@@ -67,25 +71,30 @@ class Search extends Component {
       image: selectedBook[0].volumeInfo.imageLinks.smallThumbnail,
       link: selectedBook[0].volumeInfo.previewLink
     })
-      .then(res => console.log(res))
+      // .then(res => console.log(res))
       .catch(err => console.log(err))
       .then(alert("Book Saved!"));
   };
 
-  sendSocketIO() {
-    socket.emit('example_message', 'demo');
+  sendSocketIO(book) {
+    socket.emit('example_message', book);
   }
 
   render() {
+    socket.on('example_message', (title) => {
+      this.setState({ message: title});
+      // this.handleOpen()
+    }
+    )
     return (
       <div className="container">
         <div className="jumbotron jumbotron-fluid mt-4 rounded">
           <div className="container">
             <h1 className="display-4">(React) Google Books Search</h1>
-            <p className="lead">Search for and Save Books of Interest</p>
+            <p className="lead">Search for and Save Books of Interest{this.state.message}</p>
           </div>
         </div>
-        <div><button onClick={this.sendSocketIO}>Send Socket.io</button></div>
+        {/* <div><button onClick={this.sendSocketIO}>Send Socket.io</button></div> */}
         <SearchForm
           search={this.state.search}
           handleFormSubmit={this.handleFormSubmit}
