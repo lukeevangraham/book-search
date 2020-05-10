@@ -4,6 +4,8 @@ import SearchForm from "../components/SearchForm";
 import API from "../utils/API";
 // import { PromiseProvider } from "mongoose";
 import openSocket from 'socket.io-client';
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import "./search.css";
 const socket = openSocket('http://localhost:8000');
 
@@ -26,9 +28,10 @@ class Search extends Component {
     // link: ""
   };
 
+  
+
   // When this component mounts, search the Giphy API for pictures of kittens
   componentDidMount() {
-    console.log("mounted!");
     // this.searchGiphy("kittens");
   }
 
@@ -73,19 +76,22 @@ class Search extends Component {
     })
       // .then(res => console.log(res))
       .catch(err => console.log(err))
-      .then(alert("Book Saved!"));
+      // .then(alert("Book Saved!"));
   };
 
   sendSocketIO(book) {
     socket.emit('example_message', book);
   }
 
+  // notify = (msg) => toast("Book added: ", msg);
+
   render() {
-    socket.on('example_message', (title) => {
-      this.setState({ message: title});
-      // this.handleOpen()
-    }
-    )
+    // socket.on('example_message', (title) => {
+    //   this.setState({ message: title});
+    //   this.notify(title)
+    //   console.log("LOOK HERE: ", title)
+    //   // this.handleOpen()
+    // })
     return (
       <div className="container">
         <div className="jumbotron jumbotron-fluid mt-4 rounded">
