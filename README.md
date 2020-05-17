@@ -1,7 +1,7 @@
 # Book Search App
 
 ## Overview
-Deployed at: https://lgraham-book-search.herokuapp.com/
+Deployed at: https://booksearch.lukegraham.us/
 
 There are so many books out there.  How do you keep track of what you want to read?  In this activity, I created a new React-based Google Books Search app to help organize a reading list. This app utilizes React components, helper/util functions, and React's lifecycle methods to query and display books based on user searches. I also used Node, Express and MongoDB so that users can save books to review or purchase later.
 
