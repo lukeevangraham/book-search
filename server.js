@@ -29,7 +29,7 @@ io.on('connection', function(socket){
     io.emit('example_message', msg)
   });
 });
-io.listen(8000);
+// io.listen(8000);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
