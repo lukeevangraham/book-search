@@ -5,6 +5,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3002;
 const app = express();
+// const socketIO = require('socket.io')
 
 // setting up Morgan logger
 app.use(logger("dev"));
@@ -29,7 +30,9 @@ io.on('connection', function(socket){
     io.emit('example_message', msg)
   });
 });
-io.listen(8000);
+const serverOnPort = io.listen(8000);
+
+// let wss = new WebSocketServer({http: serverOnPort})
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
