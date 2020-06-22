@@ -7,7 +7,7 @@ import openSocket from 'socket.io-client';
 // import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import "./search.css";
-const socket = openSocket('https://' + window.location.hostname + ':8000');
+const socket = openSocket('https://' + window.location.hostname);
 
 class Search extends Component {
 
