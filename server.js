@@ -1,11 +1,12 @@
 const express = require("express");
+const http = require("http");
 const routes = require("./routes");
 const logger = require("morgan");
 const path = require("path");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3002;
+const socketIo = require('socket.io')
 const app = express();
-// const socketIO = require('socket.io')
 
 // setting up Morgan logger
 app.use(logger("dev"));
@@ -18,8 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Socket.io
-const http = require('http').Server(app);
-const io = require('socket.io')(http);
+// const http = require('http').Server(app);
+// const io = require('socket.io')(http);
+const server = http.createServer(app);
+const io = socketIo(server);
 io.on('connection', function(socket){
   console.log('a user connected');
   socket.on('disconnect', function(){
