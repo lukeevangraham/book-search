@@ -16,7 +16,7 @@ var db = require("./models")
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Socket.io
+// Socket.io and heroku
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
 io.on('connection', function(socket){
