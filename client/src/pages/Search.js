@@ -7,7 +7,7 @@ import openSocket from 'socket.io-client';
 // import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 import "./search.css";
-const socket = openSocket('wss://lgraham-book-search.herokuapp.com');
+const socket = openSocket('http://localhost:8000');
 
 class Search extends Component {
 

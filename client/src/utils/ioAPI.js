@@ -1,5 +1,5 @@
 import openSocket from 'socket.io-client';
-const socket = openSocket('wss://lgraham-book-search.herokuapp.com');
+const socket = openSocket('http://localhost:8000');
 
 function subscribeToBookAdd(book) {
     socket.on('example_message', message => book(message));

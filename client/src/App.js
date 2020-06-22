@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 const io = require("socket.io-client");
-const socket = io("wss://lgraham-book-search.herokuapp.com");
+const socket = io("http://localhost:8000");
 
 const customId = "custom-id-yes";
 
