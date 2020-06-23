@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 const io = require("socket.io-client");
-const socket = io('https://' + window.location.hostname);
+const socket = io('http://localhost:3002', { transports: ['websocket'], upgrade: false});
 
 const customId = "custom-id-yes";
 
@@ -44,7 +44,7 @@ class App extends Component {
   };
 
   render() {
-    console.log("LOCATION", window.location)
+    // console.log("LOCATION", window.location)
     socket.on("example_message", (title) => {
       this.setState({ message: title });
       this.notify(title);

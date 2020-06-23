@@ -2,7 +2,7 @@ const express = require("express");
 const http = require("http");
 const routes = require("./routes");
 const logger = require("morgan");
-const path = require("path");
+// const path = require("path");
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 3002;
 const socketIo = require('socket.io')
@@ -17,6 +17,15 @@ var db = require("./models")
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
+app.use(routes)
+
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", { useNewUrlParser: true });
 
 // Socket.io
 // const http = require('http').Server(app);
@@ -33,19 +42,15 @@ io.on('connection', function(socket){
     io.emit('example_message', msg)
   });
 });
-const serverOnPort = io.listen(8000);
+// const serverOnPort = io.listen(8000);
 
 // let wss = new WebSocketServer({http: serverOnPort})
 
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
 
-app.use(routes)
 
-// Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", { useNewUrlParser: true });
+
+
+
 
 // Define API routes here
 
@@ -55,6 +60,6 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooks", {
 //   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 // });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });
