@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 const io = require("socket.io-client");
-const socket = io('http://localhost:3002', { transports: ['websocket'], upgrade: false});
+const socket = io('http://localhost:8329', { transports: ['websocket'], upgrade: false});
 
 const customId = "custom-id-yes";
 
